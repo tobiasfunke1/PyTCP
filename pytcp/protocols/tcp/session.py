@@ -413,7 +413,8 @@ class TcpSession:
         """
         if self._state in {FsmState.ESTABLISHED, FsmState.CLOSE_WAIT}:
             with self._lock_tx_buffer:
-                # self._tx_buffer.extend(data)
+                if not config.TCP_ACK_HANDLING_DISABLE:
+                    self._tx_buffer.extend(data)
                 return len(data)
         # This error should be risen when session is locally or fully closed
         raise TcpSessionError(
@@ -762,8 +763,8 @@ class TcpSession:
             )
         # Purge acked data from TX buffer
         with self._lock_tx_buffer:
-            # del self._tx_buffer[: self._tx_buffer_una]
-            pass
+            if not config.TCP_ACK_HANDLING_DISABLE:
+                del self._tx_buffer[: self._tx_buffer_una]
         self._tx_buffer_seq_mod += self._tx_buffer_una
         __debug__ and log(
             "tcp-ss",
