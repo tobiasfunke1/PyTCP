@@ -637,7 +637,6 @@ class TcpSession:
                         f"[{self}] - Transmitting data segment: "
                         f"seq {self._snd_nxt} len {len(transmit_data)}",
                     )
-                    print("transmit_data:", len(transmit_data))
                     self._transmit_packet(
                         flag_ack=True, data=bytes(transmit_data)
                     )
