@@ -144,3 +144,6 @@ LOCAL_TCP_WIN = (
 # Native support for UDP Echo (used for packet flow unit testing only and should
 # always be disabled).
 UDP_ECHO_NATIVE_DISABLE = True
+
+# Disable ACK handling in TCP for fuzzing purposes.
+TCP_ACK_HANDLING_DISABLE = False

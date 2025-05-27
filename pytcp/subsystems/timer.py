@@ -147,8 +147,6 @@ class Timer:
         __debug__ and log("stack", "Started timer thread")
 
         while self._run_thread:
-            time.sleep(0.001)
-
             # Tck register timers
             for name in self._timers:
                 self._timers[name] -= 1
